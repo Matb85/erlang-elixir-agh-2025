@@ -17,7 +17,7 @@ defmodule PollutiondbWeb.Router do
   scope "/", PollutiondbWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", StationLive
   end
 
   # Other scopes may use custom stacks.
