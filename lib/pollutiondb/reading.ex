@@ -27,6 +27,7 @@ defmodule Pollutiondb.Reading do
     __MODULE__
     |> where([r], r.date == ^date)
     |> Pollutiondb.Repo.all()
+    |> Pollutiondb.Repo.preload(:station)
   end
 
   defp parse_row(row) do
@@ -92,6 +93,15 @@ defmodule Pollutiondb.Reading do
         IO.puts("Station not found: #{reading.stationName}")
       end
     end)
+  end
+
+  def last_10_readings do
+    Ecto.Query.from(r in Pollutiondb.Reading,
+      limit: 10,
+      order_by: [desc: r.date, desc: r.time]
+    )
+    |> Pollutiondb.Repo.all()
+    |> Pollutiondb.Repo.preload(:station)
   end
 
 end

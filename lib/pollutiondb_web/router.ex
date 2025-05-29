@@ -19,7 +19,7 @@ defmodule PollutiondbWeb.Router do
 
     live "/", StationLive
     live "/range", StationRangeLive
-
+    live "/readings", ReadingLive
   end
 
   # Other scopes may use custom stacks.
