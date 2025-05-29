@@ -1,5 +1,9 @@
 import Config
 
+config :pollutiondb, ecto_repos: [Pollutiondb.Repo]
+config :pollutiondb, Pollutiondb.Repo, database: "database/pollutiondb.db"
+
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #

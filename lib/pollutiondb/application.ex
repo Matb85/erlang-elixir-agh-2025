@@ -8,6 +8,7 @@ defmodule Pollutiondb.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      Pollutiondb.Repo,
       PollutiondbWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:pollutiondb, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Pollutiondb.PubSub},
