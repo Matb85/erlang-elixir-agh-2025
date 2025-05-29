@@ -32,6 +32,8 @@ defmodule Pollutiondb.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:ecto_sql, "~> 3.11"},
+      {:ecto_sqlite3, "~> 0.15"},
       {:phoenix, "~> 1.7.12"},
       {:phoenix_html, "~> 4.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
