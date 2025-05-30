@@ -47,26 +47,48 @@ defmodule PollutiondbWeb.StationRangeLive do
 
   def render(assigns) do
     ~H"""
-    <h1>Station Range</h1>
-    <form phx-change="update">
-      Lat min
-      <input type="range" min="0" max="100" name="lat_min" value={@lat_min}/><br/>
-      Lat max
-      <input type="range" min="0" max="100" name="lat_max" value={@lat_max}/><br/>
-      Lon min
-      <input type="range" min="0" max="100" name="lon_min" value={@lon_min}/><br/>
-      Lon max
-      <input type="range" min="0" max="100" name="lon_max" value={@lon_max}/><br/>
-    </form>
+      <h1 class="text-3xl font-bold mb-6 text-blue-700 text-center">Station Range</h1>
+      <form phx-change="update" class="space-y-6 max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
+        <div>
+          <label class="block text-gray-700 font-semibold mb-2">Lat min</label>
+          <input type="range" min="0" max="100" name="lat_min" value={@lat_min}
+          class="w-full accent-blue-500"/>
+          <span class="text-sm text-gray-500">Value: <%= @lat_min %></span>
+        </div>
+        <div>
+          <label class="block text-gray-700 font-semibold mb-2">Lat max</label>
+          <input type="range" min="0" max="100" name="lat_max" value={@lat_max}
+          class="w-full accent-blue-500"/>
+          <span class="text-sm text-gray-500">Value: <%= @lat_max %></span>
+        </div>
+        <div>
+          <label class="block text-gray-700 font-semibold mb-2">Lon min</label>
+          <input type="range" min="0" max="100" name="lon_min" value={@lon_min}
+          class="w-full accent-blue-500"/>
+          <span class="text-sm text-gray-500">Value: <%= @lon_min %></span>
+        </div>
+        <div>
+          <label class="block text-gray-700 font-semibold mb-2">Lon max</label>
+          <input type="range" min="0" max="100" name="lon_max" value={@lon_max}
+          class="w-full accent-blue-500"/>
+          <span class="text-sm text-gray-500">Value: <%= @lon_max %></span>
+        </div>
+      </form>
 
-    <h2>Stations in Range</h2>
-    <ul>
-      <%= for station <- @stations do %>
-        <li><%= station.name %> (Lat: <%= station.lat %>, Lon: <%= station.lon %>)</li>
-      <% end %>
-    </ul>
-    <p>Total stations in range: <%= length(@stations) %></p>
-
+      <h2 class="text-2xl font-semibold mt-10 text-blue-700">Stations in Range</h2>
+      <div class="space-y-6 max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md mt-4">
+        <ul class="divide-y divide-gray-200 mb-4">
+        <%= for station <- @stations do %>
+          <li class="py-2 flex justify-between items-center">
+          <span class="font-medium text-gray-800"><%= station.name %></span>
+          <span class="text-sm text-gray-500">Lat: <%= station.lat %>, Lon: <%= station.lon %></span>
+          </li>
+        <% end %>
+        </ul>
+        <p class="text-right text-gray-600 font-semibold">
+        Total stations in range: <span class="text-blue-700"><%= length(@stations) %></span>
+        </p>
+      </div>
     """
   end
 

@@ -82,55 +82,58 @@ defmodule PollutiondbWeb.ReadingLive do
 
   def render(assigns) do
     ~H"""
-    <h1>Last 10 Readings</h1>
-    <form phx-submit="search" phx-change="date_change">
-      <label for="date">Select date:</label>
-      <input type="date" id="date" name="date" value={@date} />
-      <button type="submit">Search</button>
-    </form>
-    <br/>
+      <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">Last 10 Readings</h1>
+      <form phx-submit="search" phx-change="date_change" class="flex flex-col md:flex-row items-center gap-4 mb-8 bg-white p-6 rounded-lg shadow">
+        <label for="date" class="font-medium text-gray-700">Select date:</label>
+        <input type="date" id="date" name="date" value={@date} class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+        <button type="submit" class="ml-0 md:ml-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Search</button>
+      </form>
 
-    <h2>Add new reading</h2>
-    <form phx-submit="insert">
-      <label for="station_id">Station:</label>
-      <select name="station_id" id="station_id">
-        <%= for station <- @stations do %>
-          <option label={station.name} value={station.id} selected={station.id == @station_id}/>
-        <% end %>
-      </select>
-      <br/>
-      <label for="type">Type:</label>
-      <input type="text" name="type" id="type" value={@type} />
-      <br/>
-      <label for="value">Value:</label>
-      <input type="number" step="any" name="value" id="value" value={@value} />
-      <br/>
-      <button type="submit">Add</button>
-    </form>
-    <br/>
+      <h2 class="text-2xl font-semibold mt-10 text-blue-600">Add new reading</h2>
+      <form phx-submit="insert" class="bg-white p-6 rounded-lg shadow mb-8 flex flex-col gap-4 mt-4">
+        <div class="flex flex-col md:flex-row items-center gap-4">
+          <label for="station_id" class="font-medium text-gray-700">Station:</label>
+          <select name="station_id" id="station_id" class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <%= for station <- @stations do %>
+            <option label={station.name} value={station.id} selected={station.id == @station_id}/>
+          <% end %>
+          </select>
+        </div>
+        <div class="flex flex-col md:flex-row items-center gap-4">
+          <label for="type" class="font-medium text-gray-700">Type:</label>
+          <input type="text" name="type" id="type" value={@type} class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+        </div>
+        <div class="flex flex-col md:flex-row items-center gap-4">
+          <label for="value" class="font-medium text-gray-700">Value:</label>
+          <input type="number" step="any" name="value" id="value" value={@value} class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+        </div>
+        <button type="submit" class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Add</button>
+      </form>
 
-    <table>
-      <thead>
+      <div class="overflow-x-auto">
+      <table class="min-w-full bg-white rounded-lg shadow">
+        <thead>
         <tr>
-          <th>Station Name</th>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Type</th>
-          <th>Value</th>
+          <th class="px-4 py-2 bg-blue-100 text-blue-700 font-semibold">Station Name</th>
+          <th class="px-4 py-2 bg-blue-100 text-blue-700 font-semibold">Date</th>
+          <th class="px-4 py-2 bg-blue-100 text-blue-700 font-semibold">Time</th>
+          <th class="px-4 py-2 bg-blue-100 text-blue-700 font-semibold">Type</th>
+          <th class="px-4 py-2 bg-blue-100 text-blue-700 font-semibold">Value</th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         <%= for reading <- @readings do %>
-          <tr>
-            <td><%= reading.station && reading.station.name %></td>
-            <td><%= reading.date %></td>
-            <td><%= reading.time %></td>
-            <td><%= reading.type %></td>
-            <td><%= reading.value %></td>
+          <tr class="hover:bg-blue-50 transition">
+          <td class="border-t px-4 py-2 text-gray-800"><%= reading.station && reading.station.name %></td>
+          <td class="border-t px-4 py-2 text-gray-800"><%= reading.date %></td>
+          <td class="border-t px-4 py-2 text-gray-800"><%= reading.time %></td>
+          <td class="border-t px-4 py-2 text-gray-800"><%= reading.type %></td>
+          <td class="border-t px-4 py-2 text-gray-800"><%= reading.value %></td>
           </tr>
         <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
     """
   end
 end

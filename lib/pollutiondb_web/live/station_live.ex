@@ -49,33 +49,53 @@ defmodule PollutiondbWeb.StationLive do
 
   def render(assigns) do
     ~H"""
-    Create new station
-    <form phx-submit="insert">
-      Name: <input type="text" name="name" value={@name} /><br/>
-      Lat: <input type="number" name="lat" step="0.1" value={@lat} /><br/>
-      Lon: <input type="number" name="lon" step="0.1" value={@lon} /><br/>
-      <input type="submit" />
+
+    <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">Create new station</h1>
+    <form phx-submit="insert" class="space-y-6 max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Name:</label>
+        <input type="text" name="name" value={@name} class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Lat:</label>
+        <input type="number" name="lat" step="0.1" value={@lat} class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Lon:</label>
+        <input type="number" name="lon" step="0.1" value={@lon} class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      </div>
+    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Add Station</button>
     </form>
 
-    <br/>
 
-    Search station by name
-    <form phx-change="search">
-      <input type="text" name="query" value={@query} placeholder="Station name" />
-    </form>
+    <h2 class="text-2xl font-semibold mt-10 text-blue-700">Search station by name</h2>
+    <div class="max-w-2xl mx-auto mt-4 p-6 bg-white rounded-lg shadow-md">
+      <form phx-change="search" class="mb-4">
+      <input type="text" name="query" value={@query} placeholder="Station name"
+        class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      </form>
 
-    <table>
-      <tr>
-        <th>Name</th><th>Longitude</th><th>Latitude</th>
-      </tr>
-      <%= for station <- @stations do %>
+      <div class="overflow-x-auto">
+      <table class="min-w-full bg-white border border-gray-200 rounded">
+        <thead>
         <tr>
-          <td><%= station.name %></td>
-          <td><%= station.lon %></td>
-          <td><%= station.lat %></td>
+          <th class="px-4 py-2 border-b text-left text-gray-700">Name</th>
+          <th class="px-4 py-2 border-b text-left text-gray-700">Longitude</th>
+          <th class="px-4 py-2 border-b text-left text-gray-700">Latitude</th>
         </tr>
-      <% end %>
-    </table>
+        </thead>
+        <tbody>
+        <%= for station <- @stations do %>
+          <tr class="hover:bg-gray-100">
+          <td class="px-4 py-2 border-b"><%= station.name %></td>
+          <td class="px-4 py-2 border-b"><%= station.lon %></td>
+          <td class="px-4 py-2 border-b"><%= station.lat %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      </div>
+    </div>
     """
   end
 end
